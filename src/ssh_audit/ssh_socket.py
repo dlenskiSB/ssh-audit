@@ -237,8 +237,8 @@ class SSH_Socket(ReadBuf, WriteBuf):
 
         self.__outputbuffer.d('KEX initialisation...', write_now=True)
 
-        kexparty = SSH2_KexParty(ciphers, macs, compressions, languages)
-        kex = SSH2_Kex(self.__outputbuffer, os.urandom(16), key_exchanges, hostkeys, kexparty, kexparty, False, 0)
+        kexparty = SSH2_KexParty(ciphers[:], macs[:], compressions[:], languages[:])
+        kex = SSH2_Kex(self.__outputbuffer, os.urandom(16), key_exchanges[:], hostkeys[:], kexparty, kexparty, False, 0)
 
         self.write_byte(Protocol.MSG_KEXINIT)
         kex.write(self)
